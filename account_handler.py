@@ -13,7 +13,7 @@ class AccountHandler:
         self.separate_accounts_for_threads = []
 
     # Read the accounts from the file split them and return them
-    def get_accounts(self, threads: int = 4):
+    def get_accounts(self, threads):
         t = threads
         acc_file = open(self.FILE, "r")
         self.split_for_bots(acc_file.readlines(), threads)

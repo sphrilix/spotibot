@@ -2,6 +2,7 @@ from webbot import Browser
 from time import sleep
 import random
 import threading
+import sys
 
 
 # This class provides the implementation of a stream bot for Spotify, by implementing each bot in a separate thread (to
@@ -28,7 +29,7 @@ class Spotibot(threading.Thread):
     bot_id: int
 
     # Init of the bot by setting the parameters of the bot
-    def __init__(self, accounts: [], song: str, bot_id: int, time_to_play: int = 120, tolerance: int = 60):
+    def __init__(self, accounts: [], song: str, bot_id: int, time_to_play: int, tolerance: int):
         threading.Thread.__init__(self)
         self.player = Browser()
         self.song = song
@@ -36,6 +37,7 @@ class Spotibot(threading.Thread):
         self.bot_id = bot_id
         self.time_to_play = time_to_play
         self.tolerance = tolerance
+        self.daemon = True
 
     # Run method which executes if the Thread is getting started
     def run(self):
@@ -49,7 +51,7 @@ class Spotibot(threading.Thread):
                 self.login(acc)
 
                 # Press "play"
-                current_player.click(classname="_11f5fc88e3dec7bfec55f7f49d581d78-scss")
+                #current_player.click(classname="_11f5fc88e3dec7bfec55f7f49d581d78-scss")
 
                 # Play song for a calculated time
                 sleep(self.play_like_a_human(self.time_to_play, self.tolerance))
@@ -66,6 +68,7 @@ class Spotibot(threading.Thread):
         sleep(2)
         current_player.type(username, id="login-username")
         current_player.type(password, id="login-password")
+        sleep(2)
         current_player.press(current_player.Key.ENTER)
         sleep(2)
 
@@ -80,3 +83,7 @@ class Spotibot(threading.Thread):
     # Calculate a random time in seconds for a given time with a given tolerance
     def play_like_a_human(self, time_to_play: int, tolerance: int):
         return random.randint(time_to_play - tolerance, time_to_play + tolerance)
+
+    # Close the current tab
+    def terminate(self):
+        self.player.close_current_tab()

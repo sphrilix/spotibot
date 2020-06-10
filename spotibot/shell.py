@@ -1,5 +1,5 @@
-from account_handler import AccountHandler
-from spotibot import Spotibot
+from spotibot.account_handler import AccountHandler
+from spotibot.spotibot import Spotibot
 import sys
 import pyinputplus as pyip
 

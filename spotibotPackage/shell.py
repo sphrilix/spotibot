@@ -1,5 +1,5 @@
-from spotibot.account_handler import AccountHandler
-from spotibot.spotibot import Spotibot
+from spotibotPackage.account_handler import AccountHandler
+from spotibotPackage.spotibot import Spotibot
 import sys
 import pyinputplus as pyip
 
@@ -30,7 +30,7 @@ class Shell:
         song_play_tolerance = \
             pyip.inputNum("Please enter the tolerance of play time (must be smaller then play time): ")
         self.start_bots(song_play_time, song_play_tolerance, song_url, threads)
-        if pyip.inputYesNo("End Program: ") is "yes":
+        if pyip.inputYesNo("End Program: ") == "yes":
             self.terminate()
 
     # Method to terminate the bots

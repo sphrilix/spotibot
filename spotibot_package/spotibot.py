@@ -51,7 +51,7 @@ class Spotibot(threading.Thread):
                 self.login(acc)
 
                 # Press "play"
-                #current_player.click(classname="_11f5fc88e3dec7bfec55f7f49d581d78-scss")
+                current_player.click(classname="_11f5fc88e3dec7bfec55f7f49d581d78-scss")
 
                 # Play song for a calculated time
                 sleep(self.play_like_a_human(self.time_to_play, self.tolerance))
